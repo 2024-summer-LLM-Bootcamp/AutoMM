@@ -15,7 +15,9 @@ python3 -m venv venv
 # 가상환경 켜기 (windows)
 source venv/Scripts/activate
 
+pip install -r requirements.txt
+
 # .env 파일 작성
 
-docker-compose up
+streamlit run app.py
 ```
