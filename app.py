@@ -1,47 +1,56 @@
-from langchain.chains import SimpleChain
-from langchain.llms import OpenAI
+import os
+import openai
 import streamlit as st
-
 from google.cloud import speech
 import io
+from langchain_openai import AzureChatOpenAI
+from langchain.prompts import PromptTemplate
+
+# 환경 변수 설정
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# 음성 인식 함수
 
 
 def transcribe_audio(audio_file_path):
-    """
-    google STT
-    """
-    client = speech.SpeechClient()
-    with io.open(audio_file_path, "rb") as audio_file:
-        content = audio_file.read()
+    # client = speech.SpeechClient()
 
-    audio = speech.RecognitionAudio(content=content)
-    config = speech.RecognitionConfig(
-        encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16, sample_rate_hertz=16000,
-        language_code="en-US")
+    # with io.open(audio_file_path, "rb") as audio_file:
+    #     content = audio_file.read()
 
-    response = client.recognize(config=config, audio=audio)
+    # audio = speech.RecognitionAudio(content=content)
+    # config = speech.RecognitionConfig(
+    #     encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+    #     sample_rate_hertz=16000,
+    #     language_code="en-US",
+    # )
 
-    transcript = ""
-    for result in response.results:
-        transcript += result.alternatives[0].transcript
+    # response = client.recognize(config=config, audio=audio)
 
-    return transcript
+    # transcript = ""
+    # for result in response.results:
+    #     transcript += result.alternatives[0].transcript
+
+    # return transcript
+    pass
+
+    # LangChain을 이용한 텍스트 처리 및 요약 함수
 
 
 def summarize_text(text):
-    """
-    AI 요약
-    """
-    llm = OpenAI(api_key="YOUR_OPENAI_API_KEY")
-    chain = SimpleChain(llm=llm)
+    # llm = OpenAI(api_key=openai.api_key)
+    # prompt = PromptTemplate(
+    #     input_variables=["text"],
+    #     template="Please summarize the following meeting transcript:\n\n{text}"
+    # )
+    # chain = LLMChain(llm=llm, prompt=prompt)
+    # summary = chain.run(text=text)
+    # return summary
 
-    prompt = f"Please summarize the following meeting transcript:\n\n{text}"
-    summary = chain.run(prompt)
-
-    return summary
+    # Streamlit 앱 설정
+    pass
 
 
-# Streamlit 앱 설정
 st.title("Automatic Meeting Transcript and Summarization")
 st.write("Upload an audio file to transcribe and summarize the meeting.")
 
