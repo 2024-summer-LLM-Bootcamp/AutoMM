@@ -43,7 +43,6 @@ STEP별로 작업을 수행하면서 그 결과를 아래의 출력 결과 JSON 
 STEP-1. 아래 세 개의 백틱으로 구분된 텍스트를 원문 그대로 읽어올 것
 STEP-2. 텍스트를 개조식으로 요약하세요. 
 개조식 요약의 정의는 다음과 같다.:
-<<<<<<< HEAD
 1. 소제목1
 	1-1. 내용
 	1-2. 내용
@@ -54,28 +53,12 @@ STEP-2. 텍스트를 개조식으로 요약하세요.
 	2-1. 내용
 	2-2. 내용
 	2-3. 내용
-=======
-소제목
-1. 내용
-2. 내용
-3. 내용
-...
-
-소제목
-1. 내용
-2. 내용
-3. 내용
->>>>>>> 81605a9de6ee307d5d4048842a37c980aaa595d5
 ...
 
 다음의 말투로 번역할 것:["지구의 나이는 45억 살이다.", "세종대왕은 조선의 위대한 국왕이다."]
 ```{text}```
 ---
-<<<<<<< HEAD
 출력 결과: {{"STEP-1": text의 첫 50글자,  "STEP-2": <text를 요점 정리 결과>}} 
-=======
-출력 결과: {{"STEP-1": <입력텍스트>의 첫 50글자,  "STEP-2": <text를 요점 정리 결과>}} 
->>>>>>> 81605a9de6ee307d5d4048842a37c980aaa595d5
 """
 
     template = template.format(text=text)
@@ -121,4 +104,3 @@ if uploaded_file is not None:
         summary = summarize_text(transcript)
         st.subheader("Summary")
         st.text_area("Summary", summary, height=150)
-
