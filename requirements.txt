@@ -1,4 +1,3 @@
-google-cloud-speech
 langchain
 streamlit
 openai
