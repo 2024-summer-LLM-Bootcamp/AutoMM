@@ -30,8 +30,18 @@ def transcribe_audio(audio_file_path):
     return transcript
 
 
-# 요약 함수
+# Summary function(요약 함수)
+
 def summarize_text(text):
+    """
+    Function to summarize the given text.
+    
+    Parameters:
+    text (str): Text to be summarized.
+    
+    Returns:
+    summary (str): JSON data containing the summarized text.
+    """
     client = AzureOpenAI(
         api_key=str_api_key,  # Azure Open AI Key
         api_version=str_api_version,  # Azue OpenAI API model
@@ -43,16 +53,16 @@ STEP별로 작업을 수행하면서 그 결과를 아래의 출력 결과 JSON 
 STEP-1. 아래 세 개의 백틱으로 구분된 텍스트를 원문 그대로 읽어올 것
 STEP-2. 텍스트를 개조식으로 요약하세요. 
 개조식 요약의 정의는 다음과 같다.:
-1. 소제목1
-	1-1. 내용
-	1-2. 내용
-	1-3. 내용
+1. Subtitle1
+	1-1. Content
+	1-2. Content
+	1-3. Content
 ...
 
-2. 소제목2
-	2-1. 내용
-	2-2. 내용
-	2-3. 내용
+2. Subtitle2
+	2-1. Content
+	2-2. Content
+	2-3. Content
 ...
 
 다음의 말투로 번역할 것:["지구의 나이는 45억 살이다.", "세종대왕은 조선의 위대한 국왕이다."]
@@ -68,10 +78,10 @@ STEP-2. 텍스트를 개조식으로 요약하세요.
         model="gpt-4o",
         messages=context,
         temperature=0,
-        top_p=0,
-        seed=1234
+        top_p=0,	# Set the top_p parameter to select high-probability responses.
+        seed=1234	# Set the seed to make results reproducible
     )
-    summary = response.choices[0].message.content
+    summary = response.choices[0].message.content# Extract the summarized text.
     print(summary)
     # llm = OpenAI(api_key=openai.api_key)
     # prompt = PromptTemplate(
